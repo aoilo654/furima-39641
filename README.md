@@ -18,6 +18,7 @@
 
 has_many :items
 has_many :orders
+has_many :addresses
 
 ## items テーブル
 
@@ -29,14 +30,14 @@ has_many :orders
 | condition_id       | integer    | null: false                    |
 | delivery_cost_id   | integer    | null: false                    |
 | sender_id          | integer    | null: false                    |
-| delivery_date _id  | integer    | null: false                    |
+| delivery_date_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
 
-has_one    :orders
-belongs_to :users
+has_one    :order
+belongs_to :user
 belongs_to :category
 belongs_to :condition
 belongs_to :delivery_cost
@@ -47,17 +48,29 @@ belongs_to :delivery_date
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| postcode      | integer    | null: false                    |
-| prefecture_id | integer    | null: false                    |
-| city          | string     | null: false                    |
-| block         | string     | null: false                    |
-| building      | string     |                                |
-| phone_number  | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| address       | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
 
 ### Association
 
-belongs_to :users
-belongs_to :items
+belongs_to :user
+belongs_to :item
+
+
+## address テーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postcode      | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false                    |
+| user          | references | null: false, foreign_key: true |
+
+### Association
+
+belongs_to :user
+has_one    :order
 belongs_to :prefecture
