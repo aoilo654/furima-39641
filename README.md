@@ -18,7 +18,6 @@
 
 has_many :items
 has_many :orders
-has_many :addresses
 
 ## items テーブル
 
@@ -48,16 +47,16 @@ belongs_to :delivery_date
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| address       | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
 
 ### Association
 
 belongs_to :user
 belongs_to :item
+has_one    :address
 
-
-## address テーブル
+## addresses テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -67,10 +66,9 @@ belongs_to :item
 | block         | string     | null: false                    |
 | building      | string     |                                |
 | phone_number  | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
-belongs_to :user
-has_one    :order
+belongs_to :order
 belongs_to :prefecture
