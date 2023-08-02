@@ -10,8 +10,8 @@ class Item < ApplicationRecord
   belongs_to :user
   
   validates :image, presence: true
-  validates :item_name, presence: true
-  validates :description, presence: true
+  validates :item_name, presence: true, length: { maximum: 40 }
+  validates :description, presence: true, length: { maximum: 1000 }
   
   validates :price, presence: true, numericality: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters" }
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range" }
