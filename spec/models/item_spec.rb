@@ -46,7 +46,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it "priceが300未満では登録できない" do
-        @item.price = Faker::Number.between(from: 1, to: 300)
+        @item.price = Faker::Number.between(from: 1, to: 299)
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
@@ -71,28 +71,28 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
       end
 
-      it "category_idが空では登録できない" do
-        @item.category_id = nil
+      it "category_idが1では登録できない" do
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
-      it "condition_idが空では登録できない" do
-        @item.condition_id = nil
+      it "condition_idが1では登録できない" do
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
-      it "delivery_cost_idが空では登録できない" do
-        @item.delivery_cost_id = nil
+      it "delivery_cost_idが1では登録できない" do
+        @item.delivery_cost_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery cost can't be blank")
       end
-      it "sender_idが空では登録できない" do
-        @item.sender_id = nil
+      it "sender_idが1では登録できない" do
+        @item.sender_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Sender can't be blank")
       end
-      it "delivery_date_idが空では登録できない" do
-        @item.delivery_date_id = nil
+      it "delivery_date_idが1では登録できない" do
+        @item.delivery_date_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery date can't be blank")
       end
