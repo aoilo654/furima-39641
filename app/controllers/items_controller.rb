@@ -30,6 +30,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    item = Item.find(params[:id])
+    if item.update(item_params)
+      redirect_to action: :show
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   private
   def item_params
     params.require(:item).permit(:item_name, :description, :category_id, :condition_id, :delivery_cost_id, :sender_id, :delivery_date_id, :price, :image).merge(user_id: current_user.id)
