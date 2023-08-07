@@ -23,7 +23,6 @@
       </span>
     </div>
 
-<%# 商品購入機能実装後編集必要 %>
     <% if user_signed_in? && current_user.id == @item.user_id %>
 
       <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
@@ -34,7 +33,6 @@
       <%= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
     
     <% end %>
-<%# //商品購入機能実装後編集必要 %>
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
