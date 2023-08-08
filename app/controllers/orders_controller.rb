@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
+  before_action :order_item
   
   def index
     @order_address = OrderAddress.new
@@ -28,5 +29,11 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def order_item
+    if Order.exists?(item_id: params[:item_id])
+      redirect_to root_path
+    end
   end
 end
