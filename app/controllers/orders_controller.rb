@@ -2,9 +2,9 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
   before_action :order_item
+  before_action :pay_key
   
   def index
-    pay_key
     @order_address = OrderAddress.new
 
     if current_user.id == @item.user_id
@@ -13,7 +13,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    pay_key
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item

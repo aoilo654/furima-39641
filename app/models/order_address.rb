@@ -8,6 +8,9 @@ class OrderAddress
     validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
     validates :city
     validates :block
+    validates :phone_number,
+               numericality: {only_integer: true, message: "is invalid. Input only number" },
+               length: { minimum: 10, maximum: 11, message: "is too short" }
     
   
     validates :user_id
@@ -15,9 +18,7 @@ class OrderAddress
 
   end
 
-  validates :phone_number,presence: true,numericality: {only_integer: true, message: "is invalid. Input only number" }
-  validates :phone_number,length: { minimum: 10, maximum: 11, message: "is too short" }
-
+  
   def save
     order = Order.create(user_id: user_id, item_id: item_id )
     Address.create(postcode: postcode, prefecture_id: prefecture_id, city: city, block: block, building: building, phone_number: phone_number, order_id: order.id)
