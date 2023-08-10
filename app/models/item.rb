@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
+  has_one    :order, dependent: :destroy
   
   validates :image, presence: true
   validates :item_name, presence: true, length: { maximum: 40 }
