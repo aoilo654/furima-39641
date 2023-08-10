@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :order_item
   
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    pay_key
     @order_address = OrderAddress.new
 
     if current_user.id == @item.user_id
@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    pay_key
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
@@ -47,5 +47,9 @@ class OrdersController < ApplicationController
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def pay_key
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   end
 end
